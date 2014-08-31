@@ -1,0 +1,3 @@
+9@RadialHand-PalmForward-9@CenterChesthigh-PalmForward_RoundHoriz-RoundHoriz_9@UlnarHand-PalmBack-9@CenterChesthigh-PalmBack
+H@TipPalm-PalmDown-OpenB@CenterChesthigh-PalmUp_Contact_H@BasePalm_H@TipPalm_Contact_H@BasePalm_H@TipPalm_Contact_H@BasePalm
+OpenA@NearPalm-ThumbUp-OpenA@CenterChesthigh-ThumbUp_RoundVert_OpenA@FromUlnarPalm-ThumbAcross-OpenA@CenterChesthigh-ThumbUp

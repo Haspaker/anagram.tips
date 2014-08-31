@@ -1,0 +1,4 @@
+BentB@BackFinger-PalmBack-BentB@CenterChesthigh-PalmBack_C@Ulnar-PalmUp-C@CenterChesthigh-PalmUp_1@CenterChesthigh-TipFingerForward
+FlatB@Thumb-PalmForward-FlatB@FromCenterNeckhigh-PalmForward_FlatB@NearSideNeckhigh-PalmAcross-FlatB@FromCenterNeckhigh-PalmForward
+OpenA@ProximInsideSternumhigh-OpenA@ProximInsideTrunkhigh_ContactRoundMidline-ContactRoundMidline_OpenA@Chest-OpenA@InsideChesthigh
+V@CenterNosehigh-FingerForward-V@CenterChinhigh-FingerForward_V@FromCenterNosehigh-FingerForward-V@FromCenterNosehigh-FingerForward

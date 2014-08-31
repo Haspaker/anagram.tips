@@ -1,0 +1,59 @@
+fs = require \fs
+{count-by, group-by, last, filter, reject, obj-to-pairs, pairs-to-obj, unique, unique-by, sort, map, foldl1} = require \prelude-ls
+
+String::lowercase = String::toLowerCase
+
+const primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113]
+const alphabet = [\a to \z] ++ <[ å ä ö é ]>
+const alpha_indices = pairs-to-obj alphabet.map (c, i) -> [c, i]
+const filepath = (langcode, wordlist, length) -> "./words/#langcode/#wordlist/#length.txt"
+
+class AnagramFinder
+
+    get_prime_product: (word) ->
+        prime_product = 1
+        for char in word.lowercase!
+            if char in alphabet 
+                prime_product *= primes[ alpha_indices[char] ]
+        return prime_product
+
+    find_anagrams_among_words: (target_word, words) ->
+
+        target_prime_product = @get_prime_product target_word
+        anagrams = []
+    
+        for word in words
+            prime_product =  @get_prime_product word
+            if prime_product is target_prime_product
+                anagrams.push word
+
+        return anagrams 
+            |> unique-by (.lowercase!) 
+            |> filter (.lowercase! isnt target_word.lowercase!)
+
+    get_anagrams: (word, wordlists, langcode, callback) ->
+
+        word .= toLowerCase!
+        wordlists .= split \,
+        wordlength = word |> (.split '') |> reject (not in alphabet) |> (.length)
+
+        if wordlength < 2 then return callback []
+
+        found_anagrams = []
+        read_wordlist_files = 0
+
+        for let wordlist in wordlists
+
+            error, words <~ fs.readFile (filepath langcode, wordlist, wordlength), encoding:\utf8
+
+            if error then console.log error
+            else
+                words .= split \\n
+                anagrams = @find_anagrams_among_words word, words
+                found_anagrams ++= anagrams |> map (anagram) -> language:langcode, source:wordlist, word:anagram
+
+            read_wordlist_files += 1
+            if read_wordlist_files == wordlists.length then callback found_anagrams
+
+
+module.exports = new AnagramFinder()

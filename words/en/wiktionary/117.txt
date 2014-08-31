@@ -1,0 +1,4 @@
+5@SideForheadhigh-PalmDown-5@SideForheadhigh-PalmDown_Wiggle-Wiggle_5@SideTrunkhigh-Palmdown-5@SideTrunkhigh-PalmDown
+9@SideNeckhigh-PalmDown-9@SideNeckhigh-PalmDown_Upanddown-Upanddown_9@SideChesthigh-PalmDown-9@SideChesthigh-PalmDown
+FlatO@Mouth-PalmBack-FlatO@NearMouth-PalmBack_Frontandback-Frontandback_FlatO@NearMouth-PalmBack-FlatO@Mouth-PalmBack
+OpenB@Chest-PalmBack-OpenB@Chest-PalmBack_Upanddown-Upanddown_OpenB@SideNeckhigh-PalmBack-OpenB@SideNeckhigh-PalmBack

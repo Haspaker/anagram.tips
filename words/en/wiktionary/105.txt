@@ -1,0 +1,3 @@
+C@Sfhead-PalmForward-FlatB@InsideChestHigh-PalmAcross_C@Palm-PalmForward-FlatB@CenterChesthigh-PalmAcross
+E@SideNeckhigh-PalmAcross-E@SideNeckhigh-PalmAcross_E@SideNeckhigh-PalmForward-E@SideNeckhigh-PalmForward
+V@SideChesthigh-PalmBack_H@InsideChesthigh-PalmBack_V@InsideChesthigh-PalmBack_H@CenterChesthigh-PalmBack

@@ -1,0 +1,19 @@
+{
+  "name": "anagram",
+  "version": "0.0.0",
+  "description": "Check and solve anagrams [website]",
+  "main": "anagram.js",
+  "dependencies": {
+    "prelude-ls": "1.1.1",
+    "livescript": "0.0.1",
+    "backbone": "~1.1.2",
+    "express": "~3.5.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "node web.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT"
+}

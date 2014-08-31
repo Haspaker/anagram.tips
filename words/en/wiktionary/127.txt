@@ -1,0 +1,4 @@
+5@SideForeheadhigh-PalmDown-5@SideForeheadhigh-PalmDown_SlowWiggle-SlowWiggle_5@SideTrunkhigh-PalmDown-5@SideTrunkhigh-PalmDown
+5@SideForeheadhigh-PalmDown-5@SideForeheadhigh-PalmDown_SlowWiggle-SlowWiggle_5@SideTrunkhigh-Palmdown-5@SideTrunkhigh-PalmDown
+Open8@NearUlnarHand-PalmAcross-OpenB@CenterChesthigh-PalmBack_Contact_Open8@UlnarHand-PalmAcross-OpenB@CenterChesthigh-PalmBack
+OpenB@InsideTrunkhigh-PalmAside-OpenB@InsideTrunkhigh-PalmAcross_OpenB@SideTrunkhigh-PalmAside-OpenB@CenterTrunkhigh-PalmAcross

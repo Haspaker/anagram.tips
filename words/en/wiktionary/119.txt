@@ -1,0 +1,5 @@
+5@NearInsideNosehigh-PalmBack-5@NearInsideNosehigh-PalmBack_5@NearInsideNeckhigh-PalmBack-5@NearInsideNeckhigh-PalmBack
+5@NearSideChesthigh-PalmBack-5@NearSideChesthigh-PalmBack_5@NearInsideChesthigh-PalmBack-5@NearInsideChesthigh-PalmBack
+A@NearInsideChesthigh-PalmAcross-A@NearInsideChesthigh-PalmAcross_A@InsideChesthigh-PalmDown-A@InsideChesthigh-PalmDown
+FlatO@CenterChesthigh-PalmDown-FlatO@SideChesthigh-PalmDown_FlatO@SideChesthigh-PalmDown-FlatO@CenterChesthigh-PalmDown
+T@NearInsideChesthigh-PalmAcross-T@NearInsideChesthigh-PalmAcross_T@InsideChesthigh-PalmDown-T@InsideChesthigh-PalmDown
