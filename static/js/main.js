@@ -106,7 +106,7 @@
       }, time);
       toPage.height('auto');
       fromPage.height(toPage.height());
-      return $('body').height(toPage.height());
+      return $('#wrapper').height(toPage.height());
     };
     function Navbar(){
       Navbar.superclass.apply(this, arguments);
@@ -541,7 +541,7 @@
           this.$('.suggestions').append(suggestions_container);
         }
       }
-      return $('body').height(this.$el.height());
+      return $('#wrapper').height(this.$el.height());
     };
     prototype.update_guide_text = function(){
       this.$('.guide .plurality').text(['', 's'][Number(this.collection.length > 2)]);
@@ -652,7 +652,7 @@
         }
       }
       this.$('.suggestions').append(suggestions_container);
-      return $('body').height(this.$el.height());
+      return $('#wrapper').height(this.$el.height());
     };
     prototype.update_guide_text = function(){
       return this.$('.language').text(this.settings.get('current_language').name);

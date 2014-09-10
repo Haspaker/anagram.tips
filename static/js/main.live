@@ -78,7 +78,7 @@ class Navbar extends Backbone.View
         fromPage.css 'left':moveLeft, time
         toPage.height \auto
         fromPage.height toPage.height!
-        $(\body).height toPage.height!
+        $(\#wrapper).height toPage.height!
 
 class Wordlists extends Backbone.View
 
@@ -417,7 +417,7 @@ class AnagramValidatorView extends Backbone.View
                     suggestion_view = new SuggestionView model:suggestion
                     suggestions_container.append suggestion_view.el
                 @$('.suggestions').append suggestions_container
-        $(\body).height @$el.height!
+        $(\#wrapper).height @$el.height!
 
 
     update_guide_text: -> 
@@ -495,7 +495,7 @@ class AnagramFinderView extends Backbone.View
                 suggestion_view = new SuggestionView model:suggestion
                 suggestions_container.append suggestion_view.el
         @$('.suggestions').append suggestions_container
-        $(\body).height @$el.height!
+        $(\#wrapper).height @$el.height!
 
 
     update_guide_text: ->  @$('.language').text @settings.get(\current_language).name
