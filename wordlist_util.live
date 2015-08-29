@@ -1,6 +1,6 @@
 fs = require \fs
 {count-by, group-by, filter, obj-to-pairs, pairs-to-obj, unique, sort, map, foldl1} = require \prelude-ls
-alphabet = 'abcdefghijklmnopqrstuvwxyz' + 'åäöø'
+alphabet = require './languages.js' .alphabet
 
 [action, wordfile, target] = process.argv[2 til] 
 

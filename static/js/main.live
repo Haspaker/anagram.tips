@@ -11,7 +11,7 @@ class APIConnection
         request_url = @api_url + "/anagrams/#iso/#wordlists/#word"
         $.ajax(request_url).done callback
         $.ajax(request_url).error -> 
-            callback [language:\en, wordlist:\dict, word:'<span style="color:red">ERROR: COULD NOT CONNECT</span>']
+            callback [language:\en, wordlist:\dict, word:'ERROR: COULD NOT CONNECT']
 
     get_languages: (callback) ->
         request_url = @api_url + "/languages"
@@ -153,13 +153,13 @@ class Languages extends Backbone.View
 
         @$el.empty!
 
-        create_flag = (iso) ->
-            """<span class="flag" data-iso="#iso">
+        create_flag = ({iso, capitalized}) ->
+            """<span class="flag" title="#capitalized" data-iso="#iso">
                     <img src="/img/gflags/png/#iso.png"/>
                </span>"""
 
-        for {iso} in @settings.get \languages
-            @$el.append create_flag iso
+        for language in @settings.get \languages
+            @$el.append create_flag language
 
     select_flag: ->
         current_iso = @settings.get \current_language .iso
@@ -184,8 +184,11 @@ class Anagram extends Backbone.Model
         suggestions: []
 
     initialize: ->
+
         @settings = window.settings
         @connection = new APIConnection()
+        @get_suggestions = _.throttle @get_suggestions, 125
+
         @get_suggestions!
         @add_listeners!
 
@@ -265,14 +268,17 @@ class AnagramView extends Backbone.View
 
         if @el `$.contains` focus_node
             character_position = $(focus_node).prevAll().length + focus_offset
-            if focus_node.childNodes.length is 2 => # FIX FIREFOX BUG
-                if focus_node.childNodes.1.nodeType is 3 # FIX FIREFOX BUG
-                    character_position += 1 # FIX FIREFOX BUG
+            if $(focus_node).html() is /\s<br>/ #FIX FIREFOX BUG 3
+                character_position += 1 #FIX FIREFOX BUG 3
+                $(focus_node).html $(focus_node).html().replace(' <br>', '&nbsp;') #FIX FIREFOX BUG 3
+            if focus_node.childNodes.length is 2 => # FIX FIREFOX BUG 2
+                if focus_node.childNodes.1.nodeType is 3 # FIX FIREFOX BUG 2
+                    character_position += 1 # FIX FIREFOX BUG 2
         else if @el is focus_node
             if $(range.startContainer).text() isnt ''
                 character_position = focus_offset
             else 
-                character_position = Math.max 1, @el.childNodes.length - 1 # FIX FIREFOX BUG
+                character_position = Math.max 1, @el.childNodes.length - 1 # FIX FIREFOX BUG 1
         else 
             @$el.lettering()
             return
@@ -310,8 +316,8 @@ class SuggestionView extends Backbone.View
             @$el.prepend "<img src='/img/linkicon.png'/>"
             switch @model.get \language
             | \en => 
-                #@$el.prop \href "http://www.merriam-webster.com/dictionary/#{ @model.get \word }"
-                @$el.prop \href "http://www.google.com/translate?hl=&sl=es&tl=en&u=http%3A%2F%2Fwww.merriam-webster.com%2Fdictionary%2F#{ @model.get \word }&anno=2&sandbox=0"
+                @$el.prop \href "http://www.merriam-webster.com/dictionary/#{ @model.get \word }"
+                #@$el.prop \href "http://www.google.com/translate?hl=&sl=es&tl=en&u=http%3A%2F%2Fwww.merriam-webster.com%2Fdictionary%2F#{ @model.get \word }&anno=2&sandbox=0"
                 #@$el.prop \href "https://www.google.se/url?sa=t&rct=j&q=&esrc=s&source=web&cd=1&cad=rja&uact=8&ved=0CCUQFjAA&url=http%3A%2F%2Fwww.merriam-webster.com%2Fdictionary%2F#{ @model.get \word }&ei=SYb-U4TwA5LWaLmIgagN&usg=AFQjCNFRVjdDjYv02LIlg5bFJvsSb--yuA&bvm=bv.74035653,d.d2s"
             | otherwise  => @$el.prop \href "http://#{ @model.get \language }.wiktionary.com/wiki/#{ @model.get \word }"
         | \wiki => 
@@ -352,7 +358,7 @@ class AnagramValidator extends Backbone.Collection
                 |> unique
             anagram.set \conflicting_letter_indices, conflicts
 
-    get_conflicting_letters: (target_anagram, other_anagram) ->
+    get_conflicting_letters:  (target_anagram, other_anagram) ->
         target_letters = target_anagram.chars()
         other_letters = other_anagram.chars()
 
@@ -389,10 +395,10 @@ class AnagramValidatorView extends Backbone.View
         @add_listeners!
 
     add_listeners: ->
-        @listenTo @collection, 'change:suggestions add remove', @update_suggestions
-        @listenTo @collection, 'change:valid', @update_validity
         @listenTo @collection, 'add', @add_new_field
         @listenTo @collection, 'remove', @remove_last_field
+        @listenTo @collection, 'change:suggestions add remove', @update_suggestions
+        @listenTo @collection, 'change:valid', @update_validity
         @listenTo @collection, 'add remove', ->
             @update_guide_text!
             @disable_or_enable_buttons!
@@ -408,7 +414,7 @@ class AnagramValidatorView extends Backbone.View
             @$('.suggestions').empty!
             anagram_texts = @collection.map (.conflicting_letters!)
             anagram_suggestions = @collection.pluck \suggestions
-            zipped =  zip anagram_texts, anagram_suggestions
+            zipped = zip anagram_texts, anagram_suggestions
             zipped = zipped |> reject (.1 |> empty)
             for [text, suggestions] in zipped
                 @$('.suggestions').append "<div>Suggested anagrams of missing letters <span class='original'>#{text * ''}</span></div>"
@@ -473,7 +479,7 @@ class AnagramFinderView extends Backbone.View
 
     add_listeners: ->
         @listenTo @settings, 'change:current_language', @update_guide_text
-        @listenTo @model.get(\anagram), 'change:suggestions', @update_suggestions
+        @listenTo @model.get(\anagram), 'change:text change:suggestions', @update_suggestions
 
     render: -> 
         anagram = @model.get \anagram

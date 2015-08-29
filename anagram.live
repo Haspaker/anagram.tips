@@ -1,18 +1,44 @@
 fs = require \fs
-{count-by, group-by, last, filter, reject, obj-to-pairs, pairs-to-obj, unique, unique-by, sort, map, foldl1} = require \prelude-ls
 
-String::lowercase = String::toLowerCase
+languages = require './languages.js'
 
-const primes = [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97, 101, 103, 107, 109, 113, 127, 131, 137, 139, 149, 151, 157, 163, 167, 173, 179, 181, 191, 193, 197, 199, 211, 223, 227, 229, 233, 239, 241, 251, 257, 263, 269, 271, 277, 281, 283, 293, 307, 311, 313, 317, 331, 337, 347, 349, 353, 359, 367, 373, 379, 383, 389, 397, 401, 409, 419, 421, 431, 433, 439, 443, 449, 457, 461, 463, 467, 479, 487, 491, 499, 503, 509, 521, 523, 541, 547, 557, 563, 569, 571, 577, 587, 593, 599, 601, 607, 613, 617, 619, 631, 641, 643, 647, 653, 659, 661, 673, 677, 683, 691, 701, 709, 719, 727, 733, 739, 743, 751, 757, 761, 769, 773, 787, 797, 809, 811, 821, 823, 827, 829, 839, 853, 857, 859, 863, 877, 881, 883, 887, 907, 911, 919, 929, 937, 941, 947, 953, 967, 971, 977, 983, 991, 997, 1009, 1013, 1019, 1021, 1031, 1033, 1039, 1049, 1051, 1061, 1063, 1069, 1087, 1091, 1093, 1097, 1103, 1109, 1117, 1123, 1129, 1151, 1153, 1163, 1171, 1181, 1187, 1193, 1201, 1213, 1217, 1223]
-const alphabet = [\a to \z] ++ <[ å ä ö é ó í á ñ ú ü ö î ]>
+{count-by, split, group-by, empty, last, filter, reject, obj-to-pairs, pairs-to-obj, unique, unique-by, sort, map, foldl1} = 
+    require \prelude-ls
+
+const alphabet = languages.alphabet |> split ''
+
 const alpha_indices = pairs-to-obj alphabet.map (c, i) -> [c, i]
-const filepath = (langcode, wordlist, length) -> "./words/#langcode/#wordlist/#length.txt"
+
+const primes = do
+    i = 1
+    found_primes = []
+    while found_primes.length < alphabet.length
+        is_prime = [ 2 to Math.sqrt(i) ] |> map (i %) |> filter (is 0) |> empty
+        if is_prime => found_primes ++= i
+        i++
+    found_primes
+
+const analogous =
+    * char: \a, variants: \áàâ
+    * char: \o, variants: \óô
+    * char: \e, variants: \éèëê
+    * char: \i, variants: \íïî
+    * char: \u, variants: \úüûù
+    * char: \n, variants: \ñ
+    * char: \c, variants: \ç
+
+for pair in analogous
+    for variant in pair.variants
+        primes[ alpha_indices[ variant ] ] = 
+            primes[ alpha_indices[ pair.char ] ]
+
+const filepath = (iso, wordlist, length) -> "./words/#iso/#wordlist/#length.txt"
 
 class AnagramFinder
 
     get_prime_product: (word) ->
         prime_product = 1
-        for char in word.lowercase!
+        for char in word.toLowerCase!
             if char in alphabet 
                 prime_product *= primes[ alpha_indices[char] ]
         return prime_product
@@ -28,10 +54,10 @@ class AnagramFinder
                 anagrams.push word
 
         return anagrams 
-            |> unique-by (.lowercase!) 
-            |> filter (.lowercase! isnt target_word.lowercase!)
+            |> unique-by (.toLowerCase!) 
+            |> filter (.toLowerCase! isnt target_word.toLowerCase!)
 
-    get_anagrams: (word, wordlists, langcode, callback) ->
+    get_anagrams: (word, wordlists, iso, callback) ->
 
         word .= toLowerCase!
         wordlists .= split \,
@@ -44,13 +70,14 @@ class AnagramFinder
 
         for let wordlist in wordlists
 
-            error, words <~ fs.readFile (filepath langcode, wordlist, wordlength), encoding:\utf8
+            error, words <~ fs.readFile (filepath iso, wordlist, wordlength), encoding:\utf8
 
-            if error then console.log error
+            if error
+                console.log error
             else
                 words .= split \\n
                 anagrams = @find_anagrams_among_words word, words
-                found_anagrams ++= anagrams |> map (anagram) -> language:langcode, source:wordlist, word:anagram
+                found_anagrams ++= anagrams |> map (anagram) -> language:iso, source:wordlist, word:anagram
 
             read_wordlist_files += 1
             if read_wordlist_files == wordlists.length then callback found_anagrams

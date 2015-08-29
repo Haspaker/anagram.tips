@@ -12,12 +12,11 @@ app.use express.static(static_dir)
 
 app.get '/' (req, res) -> res.sendfile homepage
 
-app.get '/api/anagrams/:langcode/:wordlists/:word' (req, res) -> 
-	langcode = req.param \langcode 
+app.get '/api/anagrams/:iso/:wordlists/:word' (req, res) -> 
+	iso = req.param \iso 
 	word = req.param \word
 	wordlists = req.param \wordlists
-	finder.get_anagrams word, wordlists, langcode, (anagrams) -> res.send anagrams
-
+	finder.get_anagrams word, wordlists, iso, (anagrams) -> res.send anagrams
 
 app.get '/api/anagrams/:language/:wordlists' (req, res) -> res.send []
 

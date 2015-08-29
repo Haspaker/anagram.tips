@@ -52,7 +52,7 @@ html
 	position: relative
 	min-height: 100%
 	// The website breaks if the width gets any smaller
-	min-width: 1150px
+	min-width: 950px //1150px
 	-webkit-font-smoothing: antialiased
 	-moz-osx-font-smoothing: grayscale
 
@@ -164,6 +164,9 @@ body a
 
 .navigation.button
 	position: absolute
+	width: 107px
+	img
+		width: 100%
 
 	@include transition(-webkit-transform 0.1s, -moz-transform 0.1s, -o-transform 0.1s, -ms-transform 0.1s, transform 0.1s)
 
@@ -204,6 +207,7 @@ body a
 	@include box-shadow(5px 5px 10px rgba(black, 0.4))
 
 .logo
+	width: 485px // Retina image 2x size
 	display: block // The margin:auto trick only works on block elements
 	margin: auto // Position the logo in the center of the screen
 
@@ -272,10 +276,15 @@ body a
 
 	.button
 
+		width: 20px // Retina image 2x size (40px)
+		margin-right: 2px // Keep some space between buttons
 		opacity: 0.9 // Looks nice
 
 		// Prevent the buttons from being text-selected by accident ('cause it looks ugly)
 		@include user-select(none)
+
+		img
+			width: 100% // Downscale image to fit content
 
 		&.disabled
 			opacity: 0.2 // Indicates that the button is disabled
@@ -337,8 +346,13 @@ body a
 	width: 700px
 	height: 25px
 	line-height: 25px // Same as height to center the text vertically
-	color: black //Fallback
-	color: rgba(black, 0.8)
+
+	&, & a
+		color: black //Fallback
+		color: rgba(black, 0.8)
+	& a:hover
+		text-decoration: underline
+
 	background: none
 	background: -moz-linear-gradient(left, rgba(255,255,255,0.45) 0%, rgba(255,255,255,0) 100%) /* FF3.6+ */
 	background: -webkit-gradient(linear, left top, right top, color-stop(0%,rgba(255,255,255,0.45)), color-stop(100%,rgba(255,255,255,0))) /* Chrome,Safari4+ */
@@ -346,7 +360,6 @@ body a
 	background: -o-linear-gradient(left, rgba(255,255,255,0.45) 0%,rgba(255,255,255,0) 100%) /* Opera 11.10+ */
 	background: -ms-linear-gradient(left, rgba(255,255,255,0.45) 0%,rgba(255,255,255,0) 100%) /* IE10+ */
 	background: linear-gradient(to right, rgba(255,255,255,0.45) 0%,rgba(255,255,255,0) 100%) /* W3C */
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#73ffffff', endColorstr='#00ffffff',GradientType=1 ) /* IE6-9 */
 	
 // To indicate a successful match in the validator view ...
 // ... the background color changes to green:

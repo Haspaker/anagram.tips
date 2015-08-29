@@ -2,7 +2,7 @@
 html {
   position: relative;
   min-height: 100%;
-  min-width: 1150px;
+  min-width: 950px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
@@ -104,10 +104,13 @@ body a {
 
 .navigation.button {
   position: absolute;
+  width: 107px;
   -webkit-transition: -webkit-transform 0.1s, -moz-transform 0.1s, -o-transform 0.1s, -ms-transform 0.1s, transform 0.1s;
   -moz-transition: -webkit-transform 0.1s, -moz-transform 0.1s, -o-transform 0.1s, -ms-transform 0.1s, transform 0.1s;
   -o-transition: -webkit-transform 0.1s, -moz-transform 0.1s, -o-transform 0.1s, -ms-transform 0.1s, transform 0.1s;
   transition: -webkit-transform 0.1s, -moz-transform 0.1s, -o-transform 0.1s, -ms-transform 0.1s, transform 0.1s; }
+  .navigation.button img {
+    width: 100%; }
   .navigation.button:hover {
     -webkit-transform: rotate(3deg) scale(0.95);
     -moz-transform: rotate(3deg) scale(0.95);
@@ -154,6 +157,7 @@ body a {
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.4); }
 
 .logo {
+  width: 485px;
   display: block;
   margin: auto; }
 
@@ -205,11 +209,15 @@ body a {
     .field-container .anagram-field:focus {
       outline: none; }
   .field-container .button {
+    width: 20px;
+    margin-right: 2px;
     opacity: 0.9;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none; }
+    .field-container .button img {
+      width: 100%; }
     .field-container .button.disabled {
       opacity: 0.2; }
 
@@ -262,16 +270,18 @@ body a {
   width: 700px;
   height: 25px;
   line-height: 25px;
-  color: black;
-  color: rgba(0, 0, 0, 0.8);
   background: none;
   background: -moz-linear-gradient(left, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 100%);
   background: -webkit-gradient(linear, left top, right top, color-stop(0%, rgba(255, 255, 255, 0.45)), color-stop(100%, rgba(255, 255, 255, 0)));
   background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 100%);
   background: -o-linear-gradient(left, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 100%);
   background: -ms-linear-gradient(left, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 100%);
-  background: linear-gradient(to right, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 100%);
-  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#73ffffff', endColorstr='#00ffffff',GradientType=1 ); }
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.45) 0%, rgba(255, 255, 255, 0) 100%); }
+  #footer, #footer a {
+    color: black;
+    color: rgba(0, 0, 0, 0.8); }
+  #footer a:hover {
+    text-decoration: underline; }
 
 .success #green-background {
   opacity: 1; }

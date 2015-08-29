@@ -2,3 +2,5 @@ node_modules
 .sass-cach
 *.sublime-project
 *.sublime-workspace
+*.js
+wordlist_util.live
