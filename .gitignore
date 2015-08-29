@@ -3,4 +3,4 @@ node_modules
 *.sublime-project
 *.sublime-workspace
 *.js
-wordlist_util.live
+wordlist_util.ls
