@@ -74,8 +74,8 @@ class Navbar extends Backbone.View
                 [toPage, fromPage] = [$(\#validator), $(\#finder)]
                 $(\body).removeClass \finder
 
-        toPage.css 'left':0, time
-        fromPage.css 'left':moveLeft, time
+        toPage.animate 'left':0, time
+        fromPage.animate 'left':moveLeft, time
         toPage.height \auto
         fromPage.height toPage.height!
         $(\#wrapper).height toPage.height!
