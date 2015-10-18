@@ -3,7 +3,7 @@ http = require \http
 finder = require './anagram.js'
 languages = require './languages.js'
 
-const static_dir = './static'
+const static_dir = './public'
 const homepage = static_dir + '/html/index.html'
 
 app = express()
