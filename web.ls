@@ -24,5 +24,5 @@ app.get '/api/languages' (req, res) -> res.send languages
 
 server_port = process.env.PORT || 8000
 
-app.listen server_port, server_ip_address, -> 
+app.listen server_port, -> 
 	console.log "Listening to port #server_port"
